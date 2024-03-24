@@ -1,7 +1,11 @@
 import plugin from '../../lib/plugins/plugin.js';
 import puppeteer from '../../lib/puppeteer/puppeteer.js';
-//import { segment } from 'icqq';
 import common from "../../lib/common/common.js";
+
+let mcheight = 1210
+let infheight = 837
+let mcheight2 = 1199
+let infheight2 = 831
 
 export class QueryHandler extends plugin {
     constructor(query) {
@@ -18,6 +22,7 @@ export class QueryHandler extends plugin {
         })
     }
 
+    
     async handleWikiQuery(e) {
         logger.info('[Minecraft]', e.msg)
         let msg = e.msg.replace("#mcwiki ","").trim()
@@ -29,9 +34,14 @@ export class QueryHandler extends plugin {
         const page = await browser.newPage()
         await page.goto(url)
         const height = await page.evaluate(() => document.documentElement.scrollHeight)
-        if (height === 1199) {
+        if (height === mcheight) {
             return this.reply('搜索不到此结果，请检查关键词是否准确无误')
-        } else
+        }else 
+        
+        if(height === mcheight2) {
+            return this.reply('搜索不到此结果，请检查关键词是否准确无误')
+        }else
+
         await page.setViewport({ width: 1280, height })
         const buff = await page.screenshot()
         await page.close()
@@ -41,6 +51,7 @@ export class QueryHandler extends plugin {
          message.push('受服务器网络波动影响，如果无法加载出正确的图片，还请您重新发送或点开上面的链接进入网页查看')
         return this.reply(await common.makeForwardMsg(this.e, message))
     }
+    
 
 }
 
@@ -71,7 +82,11 @@ export class INF extends plugin {
         const page = await browser.newPage()
         await page.goto(url)
         const height = await page.evaluate(() => document.documentElement.scrollHeight)
-        if (height === 831) {
+        if (height === infheight) {
+            return this.reply('搜索不到此结果，请检查关键词是否准确无误')
+        } else
+
+        if (height === infheight2) {
             return this.reply('搜索不到此结果，请检查关键词是否准确无误')
         } else
         await page.setViewport({ width: 1280, height })
