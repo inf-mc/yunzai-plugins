@@ -2,7 +2,4 @@
 trss-yunzaibot plugins
 
 INF.js
-win版不用修改尺寸但是linux服务器要设置height 
-Minecraft wiki:height设置为1210
-
-INF wiki:height设置为837
+一款可以快捷查询mcwiki和INFwiki的插件，自动裁切并返回图片，还提供了网络不好情况时的返回链接功能
